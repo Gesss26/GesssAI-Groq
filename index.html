@@ -163,7 +163,7 @@
     <h1>
         <i class="fas fa-futbol"></i> Analyst Pro
         <span class="real-data-badge"><i class="fas fa-database"></i> REALI</span>
-        <span class="model-badge"><i class="fas fa-microchip"></i> Llama 3.3</span>
+        <span class="model-badge"><i class="fas fa-microchip"></i> Llama 3.1</span>
     </h1>
 
     <div class="tabs">
@@ -196,17 +196,17 @@
             <div style="font-size:11px;color:#94a3b8;margin-top:4px;">
                 <i class="fas fa-info-circle"></i> Open-Meteo è gratuito e non richiede chiave API
             </div>
-            <label>Groq AI (Llama 3.3 70B)</label>
+            <label>Groq AI (Llama 3.1 8B)</label>
             <input type="text" id="groqKey" value="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" />
             <div style="margin-top: 12px; color: #94a3b8; font-size: 12px;">
                 <i class="fas fa-info-circle"></i> Chiave preimpostata. Modificabile.
             </div>
             <div class="info-box">
-                <i class="fas fa-check-circle"></i> <strong>Dati REALI</strong> · GROQ AI con Llama 3.3 70B · 🌤️ Open-Meteo
+                <i class="fas fa-check-circle"></i> <strong>Dati REALI</strong> · GROQ AI con Llama 3.1 8B · 🌤️ Open-Meteo
             </div>
         </div>
     </div>
-    <div class="footer-small">Analisi calcistica con GROQ AI · v6.2</div>
+    <div class="footer-small">Analisi calcistica con GROQ AI · v6.3</div>
 </div>
 
 <div class="analysis-overlay" id="analysisOverlay">
@@ -281,7 +281,7 @@
             ]}
         ];
 
-        // -------------------- SQUADRE AGGIORNATE (SERIE C CORRETTA) --------------------
+        // -------------------- SQUADRE AGGIORNATE --------------------
         const teamsDB = {
             // Serie A (20) - CON FROSINONE!
             serie_a: [
@@ -297,7 +297,7 @@
                 'Padova', 'Palermo', 'Pisa', 'Sampdoria', 'Sassuolo', 'Südtirol', 'Verona', 'Vicenza', 'Virtus_Entella'
             ],
             
-            // Serie C - Girone A (20 squadre) - AGGIORNATO!
+            // Serie C - Girone A (20 squadre)
             serie_c_a: [
                 'AlbinoLeffe', 'Alcione_Milano', 'Arzignano_Valchiampo', 'Carpi', 'Cittadella',
                 'Desenzano', 'Dolomiti_Bellunesi', 'Folgore_Caratese', 'Giana_Erminio',
@@ -305,14 +305,14 @@
                 'Pergolettese', 'Pro_Vercelli', 'Renate', 'Trento', 'Treviso', 'Union_Brescia'
             ],
             
-            // Serie C - Girone B (20 squadre) - AGGIORNATO!
+            // Serie C - Girone B (20 squadre)
             serie_c_b: [
                 'Atalanta_U23', 'Campobasso', 'Forlì', 'Grosseto', 'Gubbio', 'Guidonia_Montecelio',
                 'Latina', 'Livorno', 'Ostiamare', 'Perugia', 'Pescara', 'Pianese', 'Pineto',
                 'Ravenna', 'Reggiana', 'Sambenedettese', 'Spezia', 'Torres', 'Vado', 'Vis_Pesaro'
             ],
             
-            // Serie C - Girone C (20 squadre) - AGGIORNATO!
+            // Serie C - Girone C (20 squadre)
             serie_c_c: [
                 'Altamura', 'Audace_Cerignola', 'Bari', 'Barletta', 'Casarano', 'Casertana',
                 'Catania', 'Cavese', 'Cosenza', 'Crotone', 'Foggia', 'Giugliano', 'Inter_U23',
@@ -639,7 +639,7 @@
             return { wins, draws, losses, goalsFor, goalsAgainst, points, position, goalRanges };
         }
 
-        // -------------------- GROQ API - MODELLO AGGIORNATO! --------------------
+        // -------------------- GROQ API - MODELLO CORRETTO! --------------------
         async function callGroqAPI(home, away, league, nation) {
             const groqKey = document.getElementById('groqKey').value.trim();
             if (!groqKey) throw new Error('Inserisci la chiave API GROQ nelle Impostazioni');
@@ -669,7 +669,8 @@
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${groqKey}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    model: 'llama-3.3-70b-versatile',
+                    // ✅ MODELLO CHE FUNZIONA SICURAMENTE - GRATUITO!
+                    model: 'llama-3.1-8b-instant',
                     messages: [
                         { role: 'system', content: 'Sei un analista di calcio professionista. Rispondi sempre con JSON valido.' },
                         { role: 'user', content: prompt }
@@ -702,7 +703,7 @@
                 analysisContent.innerHTML = `
                     <div class="loading">
                         <i class="fas fa-robot"></i>
-                        <div>GROQ AI (Llama 3.3 70B) sta analizzando</div>
+                        <div>GROQ AI (Llama 3.1 8B) sta analizzando</div>
                         <div style="font-size:13px; margin-top:6px;">${homeDisplay} vs ${awayDisplay}</div>
                         <div style="font-size:12px; margin-top:8px; color:#475569;">⏳ Richiesta in corso</div>
                     </div>
@@ -869,7 +870,7 @@
                     </div>
 
                     <div style="margin-top: 12px; font-size: 11px; color: #64748b; border-top: 1px solid #1f2f44; padding-top: 12px; display: flex; justify-content: space-between; flex-wrap: wrap;">
-                        <span><i class="fas fa-robot"></i> GROQ AI · Llama 3.3 70B</span>
+                        <span><i class="fas fa-robot"></i> GROQ AI · Llama 3.1 8B</span>
                         <span style="color: #6ee7b7;"><i class="fas fa-check-circle"></i> Dati reali · 🌤️ Open-Meteo</span>
                     </div>
                 `;
@@ -901,7 +902,7 @@
 
         renderLeagues();
         populateTeams(selectedLeagueId);
-        console.log('⚽ Analyst Pro v6.2 - Serie C aggiornata 2026/27');
+        console.log('⚽ Analyst Pro v6.3 - Modello Groq: llama-3.1-8b-instant');
     })();
 </script>
 </body>
